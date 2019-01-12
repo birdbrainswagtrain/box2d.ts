@@ -77,8 +77,8 @@
   /// prevent overshoot.
   const b2_maxAngularCorrection = 8 / 180 * b2_pi;
   /// The maximum linear velocity of a body. This limit is very large and is used
-  /// to prevent numerical problems. You shouldn't need to adjust this.
-  const b2_maxTranslation = 2;
+  /// to prevent numerical problems. You shouldn't need to adjust this. - DISAGREE
+  const b2_maxTranslation = 10;
   const b2_maxTranslationSquared = b2_maxTranslation * b2_maxTranslation;
   /// The maximum angular velocity of a body. This limit is very large and is used
   /// to prevent numerical problems. You shouldn't need to adjust this.
@@ -6611,7 +6611,9 @@
           for (let f = this.m_fixtureList; f; f = f.m_next) {
               f.Synchronize(this.m_xf, this.m_xf);
           }
-          this.m_world.m_contactManager.FindNewContacts();
+          // Seems to have a very small chance of causing very big issues,
+          // possibly a performance concern, and not really necessary.
+          // this.m_world.m_contactManager.FindNewContacts();
       }
       SetTransform(xf) {
           this.SetTransformVec(xf.p, xf.GetAngle());

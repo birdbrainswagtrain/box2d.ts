@@ -426,7 +426,10 @@ export class b2Body {
       f.Synchronize(this.m_xf, this.m_xf);
     }
 
-    this.m_world.m_contactManager.FindNewContacts();
+	// Seems to have a very small chance of causing very big issues,
+	// possibly a performance concern, and not really necessary.
+	
+    // this.m_world.m_contactManager.FindNewContacts();
   }
 
   public SetTransform(xf: b2Transform): void {
