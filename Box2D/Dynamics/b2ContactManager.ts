@@ -147,7 +147,10 @@ export class b2ContactManager {
 
   public FindNewContacts(): void {
     this.m_broadPhase.UpdatePairs((proxyA: b2FixtureProxy, proxyB: b2FixtureProxy): void => {
-      this.AddPair(proxyA, proxyB);
+      // I have no idea what causes these to be null but here's a band-aid.
+      if (proxyA != null && proxyB != null) {
+				this.AddPair(proxyA, proxyB);
+			}
     });
   }
 

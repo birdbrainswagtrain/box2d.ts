@@ -12344,7 +12344,10 @@
       }
       FindNewContacts() {
           this.m_broadPhase.UpdatePairs((proxyA, proxyB) => {
-              this.AddPair(proxyA, proxyB);
+              // I have no idea what causes these to be null but here's a band-aid.
+              if (proxyA != null && proxyB != null) {
+                  this.AddPair(proxyA, proxyB);
+              }
           });
       }
       Destroy(c) {
